@@ -1,8 +1,8 @@
 import streamlit as st
 import google.generativeai as genai
 
-st.title("🎈 My Chatbot app")
-st.subheader("คุยกันหน่อยยย")
+st.title("👨‍🏫 Python tutor")
+st.subheader(f"What Do You Want :blue[Know?]")
 
 # Capture Gemini API key
 gemini_api_key = st.text_input("Gemini API Key: ", placeholder="Type your API Key here...", type="password")
@@ -23,7 +23,7 @@ if "chat_history" not in st.session_state:
 
 # Display previous chat history using st.chat_message (if available)
 for role, message in st.session_state.chat_history:
-      with st.chat_message("role", avatar="🍊"):
+      with st.chat_message("role", avatar="👨‍🏫" if role == "assistant" else "🧐"):
             st.markdown(message)
 
 # Capture user input and generate bot response
@@ -35,7 +35,7 @@ if user_input := st.chat_input("Type your message here..."):
      # Use Gemini AI to generate a bot response
     if model: 
         try: 
-            response = model.generate_content(user_input) 
+            response = model.generate_content("I am your Python coding tutor. Tell you what I can help you about Python coding. After you response, I’ll help you about what Python topic ou’d like to learn, such as loops, functions, data structures, or debugging. Based on your needs, I’ll explain the concepts and definitions about any topics clearly, provide code examples, and guide you step by step.") 
             bot_response = response.text
 
             # Store and display the bot response
